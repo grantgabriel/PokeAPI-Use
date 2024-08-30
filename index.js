@@ -4,7 +4,7 @@ const app = express();
 
 app.use(express.json());
 
-// Ambik data pokemon
+// Ambil data pokemon
 app.get('/pokemon/:id', async (req, res) => {
   try {
     const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${req.params.id}`);
@@ -18,29 +18,34 @@ app.get('/pokemon/:id', async (req, res) => {
 app.post('/pokemon', (req, res) => {
   const newPokemon = req.body;
   res.json({
-    message: 'Pokemon has been inserted',
+    message: 'Pokemon berhasil dimasukkan',
     pokemon: newPokemon
   });
 });
 
+// Put endpoint
 app.put('/pokemon/:id', (req, res) => {
-  res.json({ message: 'This is PUT operation' });
+  res.json({ message: 'Ini operasi PUT' });
 });
 
+// Patch endpoint
 app.patch('/pokemon/:id', (req, res) => {
-  res.json({ message: 'This is PATCH operation' });
+  res.json({ message: 'Ini operasi PATCH' });
 });
 
+// Delete endpoint
 app.delete('/pokemon/:id', (req, res) => {
-  res.json({ message: 'This is DELETE operation' });
+  res.json({ message: 'Ini operasi DELETE' });
 });
 
 app.head('/pokemon/:id', (req, res) => {
-  res.sendStatus(200);
+  res.status(200).json({ message: 'Ini operasi HEAD' });
 });
 
+
+// Options endpoint
 app.options('/pokemon/:id', (req, res) => {
-  res.set('Allow', 'GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS').sendStatus(200);
+  res.json({ message: 'Ini operasi OPTIONS' });
 });
 
 const PORT = process.env.PORT || 3000;
